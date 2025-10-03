@@ -17,7 +17,7 @@ const About = () => {
             
             <p className="text-lg text-muted-foreground leading-relaxed">
               With <span className="text-primary font-semibold">100+ problems solved</span> on LeetCode and active 
-              participation in coding contests, I continuously sharpen my problem-solving skills. I'm exploring 
+              participation in leetcode weekly coding contests, I continuously sharpen my problem-solving skills. I'm exploring 
               full-stack development with React.js and Node.js, mobile development with Flutter, and diving deep 
               into Generative AI through the Google Cloud Beginner Program.
             </p>

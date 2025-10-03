@@ -82,7 +82,7 @@ const Contact = () => {
                     size="lg"
                     asChild
                   >
-                    <a href="https://leetcode.com/u/ZWCMA2Saw6/" target="_blank" rel="noopener noreferrer">
+                    <a href="https://leetcode.com/u/ZWCMA2Saw6/-" target="_blank" rel="noopener noreferrer">
                       <Code2 className="w-5 h-5 mr-3" />
                       LeetCode Profile
                     </a>
