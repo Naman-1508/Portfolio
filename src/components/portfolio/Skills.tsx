@@ -27,11 +27,6 @@ const Skills = () => {
       title: "Tools & Platforms",
       skills: ["VS Code", "Git", "GitHub", "MongoDB Compass"]
     },
-    {
-      icon: Brain,
-      title: "AI/ML",
-      skills: ["Generative AI", "Google Cloud Platform"]
-    }
   ];
 
   return (
