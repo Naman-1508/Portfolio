@@ -23,9 +23,7 @@ const About = () => {
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
-              My technical toolkit spans across multiple domains - from frontend frameworks to databases, 
-              from mobile apps to AI/ML. I believe in learning by doing, and my projects reflect my commitment 
-              to building practical, user-centric applications.
+              I work across multiple tech domains — frontend frameworks, databases, mobile apps, and full-stack web development. I believe in hands-on learning, and my projects showcase my focus on creating practical, user-friendly applications.
             </p>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
