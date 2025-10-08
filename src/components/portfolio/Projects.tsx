@@ -6,21 +6,21 @@ const Projects = () => {
   const projects = [
     {
       title: "RoadIntel",
-      description: "An intelligent road monitoring and analytics system leveraging computer vision and machine learning to analyze road conditions, traffic patterns, and infrastructure health. Currently building advanced features for real-time road condition assessment.",
+      description: "RoadIntel is a smart traffic and accident reporting platform that allows users to register, report accidents with details, and track incidents in real-time. It ensures safety awareness by providing a secure, user-friendly interface with backend-powered data management.",
       tags: ["React","TypeScript","TailwindCSS","Node.js","Express.js","MongoDB","JWT"],
       github: "https://github.com/Naman-1508/RoadIntel",
       status: "In Development"
     },
     {
       title: "GuardianQuest",
-      description: "An immersive security-focused game application that gamifies cybersecurity concepts and challenges. Players navigate through various security scenarios while learning about modern cyber threats and defense mechanisms.",
+      description: "Guardian Quest is a platform that uses generative AI to help children in hospitals and orphanages create stories and games, offering emotional support, creative expression, and moments of joy during challenging times",
       tags: ["React","TypeScript","TailwindCSS","Node.js","Express.js","JWT","MongoDB"],
       github: "https://github.com/Naman-1508/GuardianQuest",
       status: "In Development"
     },
     {
       title: "Jarvis",
-      description: "A sophisticated AI-powered virtual assistant that integrates multiple AI capabilities including natural language processing, task automation, and smart home integration. Building towards a comprehensive personal AI companion.",
+      description: "arvis is a customizable AI virtual assistant built in Python that automates tasks using speech recognition and text-to-speech.",
       tags: ["Python","APIs"],
       github: "https://github.com/Naman-1508/Jarvis",
       status: "In Development"
