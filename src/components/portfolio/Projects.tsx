@@ -20,7 +20,7 @@ const Projects = () => {
     },
     {
       title: "Jarvis",
-      description: "arvis is a customizable AI virtual assistant built in Python that automates tasks using speech recognition and text-to-speech.",
+      description: "Jarvis is a customizable AI virtual assistant built in Python that automates tasks using speech recognition and text-to-speech.",
       tags: ["Python","APIs"],
       github: "https://github.com/Naman-1508/Jarvis",
       status: "In Development"
