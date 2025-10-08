@@ -104,7 +104,7 @@ const Projects = () => {
               className="border-primary/50 hover:bg-primary/10"
               asChild
             >
-              <a href="https://github.com/namanjain" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/Naman-1508" target="_blank" rel="noopener noreferrer">
                 <Github className="w-5 h-5 mr-2" />
                 View All Projects on GitHub
               </a>
