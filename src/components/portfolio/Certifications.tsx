@@ -1,91 +1,251 @@
-import { Award, ExternalLink } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useEffect, useRef } from "react";
+import { Award, Star, Trophy } from "lucide-react";
+
+const certifications = [
+  {
+    title: "Data Structures & Algorithms",
+    issuer: "Infosys Springboard",
+    description: "Comprehensive coverage of fundamental and advanced DSA concepts — arrays, trees, graphs, dynamic programming, and more.",
+    status: "Completed",
+    accent: "hsl(180,100%,50%)",
+    icon: Award,
+    year: "2024",
+  },
+  {
+    title: "Introduction to MongoDB",
+    issuer: "MongoDB University",
+    description: "Foundational knowledge in NoSQL database architecture, CRUD operations, aggregation pipelines, and MongoDB Atlas.",
+    status: "Completed",
+    accent: "hsl(150,100%,50%)",
+    icon: Award,
+    year: "2024",
+  },
+  {
+    title: "Google Cloud Beginner Gen AI",
+    issuer: "Google Cloud Platform",
+    description: "Cutting-edge Generative AI technologies, LLMs, prompt engineering, and Google Cloud AI product suite.",
+    status: "Ongoing",
+    accent: "hsl(270,100%,65%)",
+    icon: Star,
+    year: "2025",
+  },
+];
 
 const Certifications = () => {
-  const certifications = [
-    {
-      title: "Data Structures and Algorithms",
-      issuer: "Infosys Springboard",
-      description: "Comprehensive course covering fundamental and advanced DSA concepts",
-      status: "Completed"
-    },
-    {
-      title: "Introduction to MongoDB",
-      issuer: "MongoDB, Inc. (MongoDB University)",
-      description: "Foundational knowledge in NoSQL database management and MongoDB",
-      status: "Completed"
-    },
-    {
-      title: "Google Cloud Batch Program - Beginner Generative AI",
-      issuer: "Google Cloud Platform",
-      description: "Learning cutting-edge Generative AI technologies and applications",
-      status: "Ongoing"
-    }
-  ];
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll(".reveal, .reveal-left, .reveal-right").forEach((el, i) => {
+              setTimeout(() => el.classList.add("visible"), i * 120);
+            });
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section id="certifications" className="py-20 px-4 bg-background/50">
-      <div className="container mx-auto max-w-5xl">
-        <div className="space-y-12 animate-fade-in">
-          <div className="text-center space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold gradient-text">Certifications</h2>
-            <div className="w-20 h-1 gradient-primary mx-auto rounded-full" />
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Continuous learning and professional development
-            </p>
-          </div>
+    <section id="certifications" ref={sectionRef} className="py-28 px-6 relative overflow-hidden">
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 50% 50% at 50% 0%, rgba(0,255,255,0.025) 0%, transparent 60%)",
+        }}
+      />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {certifications.map((cert, index) => (
-              <div 
-                key={index}
-                className="gradient-card rounded-xl p-6 border border-border hover:border-primary transition-all hover:scale-105 duration-300"
+      <div className="max-w-7xl mx-auto relative">
+        {/* Header */}
+        <div className="mb-16 reveal">
+          <div
+            className="inline-flex items-center gap-2 mb-4 px-3 py-1"
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: "0.7rem",
+              letterSpacing: "0.2em",
+              color: "rgba(150,100%,50%,0.8)",
+              border: "1px solid rgba(0,255,150,0.15)",
+              borderRadius: "3px",
+              background: "rgba(0,255,150,0.03)",
+            }}
+          >
+            06 / CERTIFICATIONS
+          </div>
+          <h2
+            className="font-display font-black"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 4rem)",
+              background: "linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.4))",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            Certifications
+          </h2>
+          <div
+            className="mt-3 h-px w-24"
+            style={{ background: "linear-gradient(90deg, hsl(150,100%,50%), transparent)" }}
+          />
+        </div>
+
+        {/* Cert cards */}
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
+          {certifications.map((cert, i) => {
+            const Icon = cert.icon;
+            return (
+              <div
+                key={i}
+                className={`reveal delay-${i * 150} rounded-2xl p-6 relative overflow-hidden group`}
+                style={{
+                  background: "rgba(255,255,255,0.02)",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                  transition: "all 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = `${cert.accent}30`;
+                  (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
+                  (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 40px rgba(0,0,0,0.3), 0 0 30px ${cert.accent}08`;
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.06)";
+                  (e.currentTarget as HTMLElement).style.transform = "";
+                  (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                }}
               >
-                <div className="space-y-4">
-                  <div className="flex items-start justify-between">
-                    <div className="p-2 rounded-lg bg-primary/10">
-                      <Award className="w-6 h-6 text-primary" />
-                    </div>
-                    <span className={`px-2 py-1 rounded-md text-xs ${
-                      cert.status === "Ongoing" 
-                        ? "bg-secondary/10 text-secondary" 
-                        : "bg-primary/10 text-primary"
-                    }`}>
-                      {cert.status}
-                    </span>
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-lg font-bold mb-2">{cert.title}</h3>
-                    <p className="text-sm text-primary mb-2">{cert.issuer}</p>
-                    <p className="text-sm text-muted-foreground">{cert.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                {/* BG glow */}
+                <div
+                  className="absolute -top-10 -right-10 w-32 h-32 rounded-full pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle, ${cert.accent}0a 0%, transparent 70%)`,
+                  }}
+                />
 
-          <div className="text-center pt-8">
-            <div className="gradient-card rounded-xl p-8 border border-border max-w-3xl mx-auto">
-              <h3 className="text-2xl font-bold mb-4">Notable Achievement</h3>
-              <div className="flex items-start gap-4 text-left">
-                <div className="p-3 rounded-lg bg-primary/10 flex-shrink-0">
-                  <Award className="w-8 h-8 text-primary" />
-                </div>
-                <div className="space-y-2">
-                  <h4 className="text-xl font-semibold">Smart Elevator Project</h4>
-                  <p className="text-muted-foreground">
-                    Arduino-based smart elevator prototype selected for presentation at the 
-                    <span className="text-primary font-semibold"> National Children Science Congress (NCSC)</span>. 
-                    Led the technical presentation and explained design decisions during the evaluation process.
-                  </p>
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    <span className="px-2 py-1 bg-primary/10 rounded-md text-xs text-primary">Arduino</span>
-                    <span className="px-2 py-1 bg-primary/10 rounded-md text-xs text-primary">C++</span>
-                    <span className="px-2 py-1 bg-primary/10 rounded-md text-xs text-primary">Team Project</span>
-                    <span className="px-2 py-1 bg-primary/10 rounded-md text-xs text-primary">National Level</span>
+                {/* Top bar */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-px"
+                  style={{ background: `linear-gradient(90deg, ${cert.accent}, ${cert.accent}00)` }}
+                />
+
+                {/* Icon + Status */}
+                <div className="flex items-start justify-between mb-5">
+                  <div
+                    className="p-3 rounded-xl"
+                    style={{
+                      background: `${cert.accent}10`,
+                      border: `1px solid ${cert.accent}20`,
+                    }}
+                  >
+                    <Icon className="w-5 h-5" style={{ color: cert.accent }} />
+                  </div>
+                  <div
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono"
+                    style={{
+                      background: cert.status === "Ongoing"
+                        ? "rgba(128,0,255,0.1)"
+                        : "rgba(0,255,255,0.08)",
+                      border: `1px solid ${cert.status === "Ongoing" ? "rgba(128,0,255,0.25)" : "rgba(0,255,255,0.2)"}`,
+                      color: cert.status === "Ongoing"
+                        ? "hsl(270,100%,75%)"
+                        : "hsl(180,100%,65%)",
+                    }}
+                  >
+                    {cert.status === "Ongoing" && (
+                      <span
+                        className="w-1.5 h-1.5 rounded-full"
+                        style={{
+                          background: "hsl(270,100%,65%)",
+                          animation: "pulse-glow-purple 1.5s ease infinite",
+                        }}
+                      />
+                    )}
+                    {cert.status}
                   </div>
                 </div>
+
+                <div className="font-mono text-xs text-white/20 mb-2">{cert.year}</div>
+                <h3 className="text-white/90 font-bold text-base mb-1.5 leading-snug">{cert.title}</h3>
+                <p className="font-mono text-xs mb-3" style={{ color: cert.accent }}>
+                  {cert.issuer}
+                </p>
+                <p className="text-white/40 text-sm leading-relaxed">{cert.description}</p>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Notable Achievement */}
+        <div
+          className="reveal rounded-2xl p-8 relative overflow-hidden"
+          style={{
+            background: "rgba(255,215,0,0.02)",
+            border: "1px solid rgba(255,215,0,0.12)",
+          }}
+        >
+          <div
+            className="absolute top-0 left-0 right-0 h-px"
+            style={{ background: "linear-gradient(90deg, transparent, rgba(255,215,0,0.4), transparent)" }}
+          />
+          <div
+            className="absolute top-0 right-0 w-64 h-64 pointer-events-none"
+            style={{
+              background: "radial-gradient(circle, rgba(255,215,0,0.04) 0%, transparent 70%)",
+            }}
+          />
+
+          <div className="flex items-start gap-5">
+            <div
+              className="p-4 rounded-xl shrink-0"
+              style={{
+                background: "rgba(255,215,0,0.08)",
+                border: "1px solid rgba(255,215,0,0.2)",
+              }}
+            >
+              <Trophy className="w-7 h-7" style={{ color: "hsl(48,100%,60%)" }} />
+            </div>
+
+            <div>
+              <div
+                className="font-mono text-xs text-yellow-400/50 mb-2 tracking-widest uppercase"
+              >
+                National Achievement
+              </div>
+              <h3
+                className="font-display font-bold text-xl mb-3"
+                style={{ color: "hsl(48,100%,70%)" }}
+              >
+                Smart Elevator Project — NCSC
+              </h3>
+              <p className="text-white/50 text-sm leading-relaxed mb-4 max-w-3xl">
+                Designed and built an{" "}
+                <span className="text-white/70">Arduino-based smart elevator prototype</span>{" "}
+                selected for presentation at the{" "}
+                <span className="text-yellow-400 font-semibold">
+                  National Children Science Congress (NCSC)
+                </span>
+                . Led the technical presentation, explaining design decisions and engineering
+                challenges during the national evaluation.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {["Arduino", "C++", "Embedded Systems", "National Level", "Team Lead"].map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2.5 py-1 rounded text-xs font-mono"
+                    style={{
+                      background: "rgba(255,215,0,0.06)",
+                      border: "1px solid rgba(255,215,0,0.15)",
+                      color: "rgba(255,215,0,0.7)",
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
