@@ -7,15 +7,14 @@ const education = [
     major: "Cyber Security",
     institution: "MS Ramaiah Institute of Technology",
     location: "Bangalore, India",
-    score: "9.02 / 10.0",
+    score: "9.07 / 10.0",
     scoreLabel: "CGPA",
     status: "Current",
-    year: "2022 – 2026",
+    year: "2023 – 2027",
     accent: "hsl(180,100%,50%)",
     details: [
       "Specialization in Cyber Security",
       "Active participant in LeetCode weekly contests",
-      "Google Cloud Generative AI program",
     ],
   },
   {
