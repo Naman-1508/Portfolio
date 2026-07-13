@@ -1,22 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Github, Linkedin, Code2, MapPin } from "lucide-react";
-
-// Helper component for staggered text animation
-const AnimatedText = ({ text, className }: { text: string, className?: string }) => {
-  return (
-    <span className={className}>
-      {text.split('').map((char, index) => (
-        <span 
-          key={index} 
-          className="char-reveal"
-          style={{ animationDelay: `${index * 0.05}s` }}
-        >
-          {char === ' ' ? '\u00A0' : char}
-        </span>
-      ))}
-    </span>
-  );
-};
+import { motion } from "framer-motion";
 
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -35,67 +19,101 @@ const Hero = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  // Framer Motion Variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 100, damping: 20 },
+    },
+  };
+
+  const text = "Naman Jain".split("");
+
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20">
       {/* Background handles Aurora via index.css */}
       <div className="bg-aurora" />
 
       {/* Content Container */}
-      <div 
+      <motion.div 
         ref={containerRef}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
         className="relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center transition-transform duration-200 ease-out"
       >
         {/* Availability Badge */}
-        <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.1] backdrop-blur-md animate-slide-up" style={{ animationDelay: '0.1s', opacity: 0, animationFillMode: 'forwards' }}>
+        <motion.div variants={itemVariants} className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.1] backdrop-blur-md">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
           </span>
           <span className="text-xs font-medium text-white/80 tracking-wide uppercase">Open to Opportunities</span>
-        </div>
+        </motion.div>
 
         {/* Main Heading */}
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-extrabold tracking-tight mb-4">
-          <AnimatedText text="Naman Jain" className="text-white/95 drop-shadow-2xl" />
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-extrabold tracking-tight mb-4 flex gap-1 drop-shadow-2xl justify-center">
+          {text.map((char, index) => (
+            <motion.span
+              key={index}
+              variants={itemVariants}
+              className="text-white/95"
+            >
+              {char === " " ? "\u00A0" : char}
+            </motion.span>
+          ))}
         </h1>
 
         {/* Dynamic Subtitle */}
-        <div className="text-xl md:text-3xl font-display font-semibold mb-6 animate-slide-up" style={{ animationDelay: '0.4s', opacity: 0, animationFillMode: 'forwards' }}>
+        <motion.div variants={itemVariants} className="text-xl md:text-3xl font-display font-semibold mb-6">
           <span className="text-white/60">Building </span>
           <span className="text-gradient-animated">Secure & Intelligent </span>
           <span className="text-white/60">Systems</span>
-        </div>
+        </motion.div>
 
         {/* Description */}
-        <p className="text-lg text-white/50 max-w-2xl mx-auto leading-relaxed mb-10 font-light animate-slide-up" style={{ animationDelay: '0.5s', opacity: 0, animationFillMode: 'forwards' }}>
+        <motion.p variants={itemVariants} className="text-lg text-white/50 max-w-2xl mx-auto leading-relaxed mb-10 font-light">
           Computer Science undergrad specializing in Cyber Security at MS Ramaiah Institute of Technology. Exploring Gen AI, Firmware Security, and Full-Stack scalable architectures.
-        </p>
+        </motion.p>
 
         {/* Quick Stats/Tags */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12 animate-slide-up" style={{ animationDelay: '0.6s', opacity: 0, animationFillMode: 'forwards' }}>
-          <span className="px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-sm text-white/70 flex items-center shadow-lg">
-            <MapPin className="w-3.5 h-3.5 mr-1.5 text-blue-400" /> Bangalore, IN
+        <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-3 mb-12">
+          <span className="px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-sm text-white/70 flex items-center shadow-lg hover:bg-white/[0.08] transition-colors cursor-default">
+            <MapPin className="w-3.5 h-3.5 mr-1.5 text-purple-400" /> Bangalore, IN
           </span>
-          <span className="px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-sm text-white/70 shadow-lg">
+          <span className="px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-sm text-white/70 shadow-lg hover:bg-white/[0.08] transition-colors cursor-default">
             9.07 / 10 CGPA
           </span>
-          <span className="px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-sm text-white/70 shadow-lg">
+          <span className="px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-sm text-white/70 shadow-lg hover:bg-white/[0.08] transition-colors cursor-default">
             300+ LeetCode Solved
           </span>
-        </div>
+        </motion.div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-5 animate-slide-up" style={{ animationDelay: '0.7s', opacity: 0, animationFillMode: 'forwards' }}>
+        <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center gap-5">
           <a href="#projects" className="btn-magnetic shadow-xl">
             View Projects
           </a>
           <a href="#contact" className="btn-magnetic-outline shadow-xl">
             Contact Me
           </a>
-        </div>
+        </motion.div>
 
         {/* Social Links */}
-        <div className="flex items-center gap-8 mt-16 animate-slide-up" style={{ animationDelay: '0.8s', opacity: 0, animationFillMode: 'forwards' }}>
+        <motion.div variants={itemVariants} className="flex items-center gap-8 mt-16">
           {[
             { href: "https://github.com/Naman-1508", icon: Github, label: "GitHub" },
             { href: "https://www.linkedin.com/in/naman-jain-123681317/", icon: Linkedin, label: "LinkedIn" },
@@ -112,8 +130,8 @@ const Hero = () => {
               <social.icon className="w-6 h-6" />
             </a>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
