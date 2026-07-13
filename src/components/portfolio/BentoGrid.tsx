@@ -26,19 +26,17 @@ const BentoGrid = () => {
   };
 
   return (
-    <div className="min-h-screen bg-aurora text-white p-4 md:p-8 flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen text-white p-4 md:p-8 flex items-center justify-center relative overflow-hidden">
       
-      {/* Background handles Aurora via index.css */}
-
       <div className="max-w-7xl w-full mx-auto relative z-10">
         
         {/* Main Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[160px]">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[180px]">
           
           {/* 1. Profile Widget (Large) */}
           <motion.div 
             layoutId="profile"
-            className="md:col-span-2 md:row-span-2 premium-card rounded-3xl p-8 flex flex-col justify-between group overflow-hidden relative"
+            className="md:col-span-2 md:row-span-2 premium-card rounded-3xl p-6 md:p-8 flex flex-col justify-between group overflow-hidden relative"
           >
             {/* Background Image Layer */}
             <div className="absolute inset-0 z-0">
@@ -63,7 +61,7 @@ const BentoGrid = () => {
               </a>
             </div>
 
-            <div className="relative z-10 mt-auto pt-20">
+            <div className="relative z-10 mt-auto pt-4">
               <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mb-2">
                 Naman Jain
               </h1>
