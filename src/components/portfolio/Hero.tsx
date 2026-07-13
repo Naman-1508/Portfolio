@@ -46,7 +46,7 @@ const Hero = () => {
         className="relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center transition-transform duration-200 ease-out"
       >
         {/* Availability Badge */}
-        <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.1] backdrop-blur-md reveal">
+        <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.1] backdrop-blur-md animate-slide-up" style={{ animationDelay: '0.1s', opacity: 0, animationFillMode: 'forwards' }}>
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
@@ -60,19 +60,19 @@ const Hero = () => {
         </h1>
 
         {/* Dynamic Subtitle */}
-        <div className="text-xl md:text-3xl font-display font-semibold mb-6 reveal delay-100">
+        <div className="text-xl md:text-3xl font-display font-semibold mb-6 animate-slide-up" style={{ animationDelay: '0.4s', opacity: 0, animationFillMode: 'forwards' }}>
           <span className="text-white/60">Building </span>
           <span className="text-gradient-animated">Secure & Intelligent </span>
           <span className="text-white/60">Systems</span>
         </div>
 
         {/* Description */}
-        <p className="text-lg text-white/50 max-w-2xl mx-auto leading-relaxed mb-10 reveal delay-200 font-light">
+        <p className="text-lg text-white/50 max-w-2xl mx-auto leading-relaxed mb-10 font-light animate-slide-up" style={{ animationDelay: '0.5s', opacity: 0, animationFillMode: 'forwards' }}>
           Computer Science undergrad specializing in Cyber Security at MS Ramaiah Institute of Technology. Exploring Gen AI, Firmware Security, and Full-Stack scalable architectures.
         </p>
 
         {/* Quick Stats/Tags */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12 reveal delay-300">
+        <div className="flex flex-wrap justify-center gap-3 mb-12 animate-slide-up" style={{ animationDelay: '0.6s', opacity: 0, animationFillMode: 'forwards' }}>
           <span className="px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-sm text-white/70 flex items-center shadow-lg">
             <MapPin className="w-3.5 h-3.5 mr-1.5 text-blue-400" /> Bangalore, IN
           </span>
@@ -85,7 +85,7 @@ const Hero = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-5 reveal delay-300">
+        <div className="flex flex-wrap items-center justify-center gap-5 animate-slide-up" style={{ animationDelay: '0.7s', opacity: 0, animationFillMode: 'forwards' }}>
           <a href="#projects" className="btn-magnetic shadow-xl">
             View Projects
           </a>
@@ -95,7 +95,7 @@ const Hero = () => {
         </div>
 
         {/* Social Links */}
-        <div className="flex items-center gap-8 mt-16 reveal delay-300">
+        <div className="flex items-center gap-8 mt-16 animate-slide-up" style={{ animationDelay: '0.8s', opacity: 0, animationFillMode: 'forwards' }}>
           {[
             { href: "https://github.com/Naman-1508", icon: Github, label: "GitHub" },
             { href: "https://www.linkedin.com/in/naman-jain-123681317/", icon: Linkedin, label: "LinkedIn" },
