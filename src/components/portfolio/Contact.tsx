@@ -58,7 +58,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" ref={sectionRef} className="py-24 px-6 relative">
+    <section id="contact" ref={sectionRef} className="py-8 px-6 relative">
       <div className="max-w-5xl mx-auto">
         <div className="reveal mb-16 text-center">
           <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight mb-4">Let's Connect</h2>
