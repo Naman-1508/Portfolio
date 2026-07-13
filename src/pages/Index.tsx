@@ -1,16 +1,24 @@
-import { useEffect } from "react";
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import BentoGrid from "@/components/portfolio/BentoGrid";
+import WelcomeScreen from "@/components/portfolio/WelcomeScreen";
 
 const Index = () => {
+  const [hasEntered, setHasEntered] = useState(false);
+
   return (
     <>
-      {/* Background Layer */}
-      <div className="bg-aurora" />
-      
-      {/* Main Content Layer */}
-      <div className="relative z-10 min-h-screen">
-        <BentoGrid />
-      </div>
+      <AnimatePresence mode="wait">
+        {!hasEntered ? (
+          <WelcomeScreen key="welcome" onEnter={() => setHasEntered(true)} />
+        ) : (
+          <div key="portfolio" className="relative z-10 min-h-screen animate-fade-in">
+            {/* Background Layer (only loads after entering) */}
+            <div className="bg-aurora" />
+            <BentoGrid />
+          </div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
