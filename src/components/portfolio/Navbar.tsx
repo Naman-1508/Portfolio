@@ -2,31 +2,20 @@ import { useState, useEffect } from "react";
 
 const navItems = [
   { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
-  { label: "Education", href: "#education" },
+  { label: "Projects", href: "#projects" },
+  { label: "Skills", href: "#skills" },
+  { label: "Achievements", href: "#certifications" },
   { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 60);
-
-      // Detect active section
-      const sections = navItems.map((n) => n.href.replace("#", ""));
-      for (const id of sections.reverse()) {
-        const el = document.getElementById(id);
-        if (el && window.scrollY >= el.offsetTop - 120) {
-          setActiveSection(id);
-          break;
-        }
-      }
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -34,38 +23,18 @@ const Navbar = () => {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
-      style={{
-        background: scrolled
-          ? "rgba(5,5,10,0.85)"
-          : "transparent",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(0,255,255,0.08)" : "none",
-        boxShadow: scrolled ? "0 4px 30px rgba(0,0,0,0.5)" : "none",
-      }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
+        scrolled
+          ? "bg-black/70 backdrop-blur-md border-white/[0.08]"
+          : "bg-transparent border-transparent"
+      }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        
         {/* Logo */}
         <a href="#" className="flex items-center gap-2 group">
-          <div
-            className="w-8 h-8 relative"
-            style={{
-              clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
-              background: "linear-gradient(135deg, hsl(180,100%,50%), hsl(270,100%,65%))",
-            }}
-          />
-          <span
-            className="font-display text-base font-bold tracking-widest"
-            style={{
-              background: "linear-gradient(135deg, hsl(180,100%,50%), hsl(270,100%,65%))",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            NJ
-          </span>
-          <span className="font-mono text-xs text-white/30 group-hover:text-white/50 transition-colors">
-            _portfolio
+          <span className="font-semibold text-lg tracking-tight text-white/90 group-hover:text-white transition-colors">
+            NJ.
           </span>
         </a>
 
@@ -75,7 +44,7 @@ const Navbar = () => {
             <a
               key={item.label}
               href={item.href}
-              className={`nav-link ${activeSection === item.href.replace("#","") ? "!text-cyan-400" : ""}`}
+              className="text-sm font-medium text-white/50 hover:text-white transition-colors"
             >
               {item.label}
             </a>
@@ -84,74 +53,43 @@ const Navbar = () => {
 
         {/* CTA button */}
         <a
-          href="mailto:namanjain01508@gmail.com"
-          className="hidden md:inline-flex items-center gap-2 px-4 py-2 text-xs font-mono tracking-widest uppercase"
-          style={{
-            border: "1px solid rgba(0,255,255,0.3)",
-            color: "hsl(180,100%,60%)",
-            background: "rgba(0,255,255,0.05)",
-            clipPath: "polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)",
-            transition: "all 0.3s ease",
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.background = "rgba(0,255,255,0.15)";
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px rgba(0,255,255,0.3)";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.background = "rgba(0,255,255,0.05)";
-            (e.currentTarget as HTMLElement).style.boxShadow = "none";
-          }}
+          href="#contact"
+          className="hidden md:inline-flex btn-premium !py-2 !px-4 !text-xs"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-          Hire Me
+          Get in Touch
         </a>
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="md:hidden p-2 text-white/70"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
-          {[0, 1, 2].map((i) => (
-            <span
-              key={i}
-              className="block h-px transition-all duration-300"
-              style={{
-                width: i === 1 ? (menuOpen ? "24px" : "16px") : "24px",
-                background: "hsl(180,100%,50%)",
-                transform: menuOpen
-                  ? i === 0 ? "rotate(45deg) translateY(6px)" : i === 2 ? "rotate(-45deg) translateY(-6px)" : "scaleX(0)"
-                  : "none",
-              }}
-            />
-          ))}
+          <div className="space-y-1.5">
+            <span className={`block w-5 h-0.5 bg-current transition-transform ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+            <span className={`block w-5 h-0.5 bg-current transition-opacity ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`block w-5 h-0.5 bg-current transition-transform ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          </div>
         </button>
       </div>
 
       {/* Mobile menu */}
-      <div
-        className="md:hidden overflow-hidden transition-all duration-500"
-        style={{
-          maxHeight: menuOpen ? "300px" : "0",
-          background: "rgba(5,5,10,0.95)",
-          backdropFilter: "blur(20px)",
-          borderTop: menuOpen ? "1px solid rgba(0,255,255,0.08)" : "none",
-        }}
-      >
-        <div className="px-6 py-4 flex flex-col gap-4">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="nav-link"
-              onClick={() => setMenuOpen(false)}
-            >
-              <span className="text-cyan-500/50 mr-2">{">"}</span>
-              {item.label}
-            </a>
-          ))}
+      {menuOpen && (
+        <div className="md:hidden bg-black border-b border-white/[0.08]">
+          <div className="px-6 py-4 flex flex-col gap-4">
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 };

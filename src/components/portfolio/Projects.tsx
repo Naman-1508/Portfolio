@@ -1,227 +1,35 @@
-import { useEffect, useRef, useState } from "react";
-import { Github, ExternalLink } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { Github, ExternalLink, ArrowRight } from "lucide-react";
 
-type Project = {
-  title: string;
-  subtitle: string;
-  description: string;
-  tags: string[];
-  github: string;
-  live?: string;
-  status: "active" | "done";
-  accent: string;
-  number: string;
-};
-
-const projects: Project[] = [
+const projects = [
+  {
+    title: "XTI-SOC",
+    subtitle: "Explainable AI Security Operations Framework",
+    year: "2026",
+    description: "Lab-scale SOC framework integrating real-time packet capture, ML-based intrusion detection, and explainable AI trained on 9.7M+ labeled network flows from CICIDS2018. Engineered a dual-pipeline XGBoost classifier achieving 0.83 ROC-AUC and implemented SHAP TreeExplainer to generate per-alert feature importance for forensic insights.",
+    tags: ["Python", "FastAPI", "Next.js", "React (TS)", "XGBoost", "SHAP", "Scapy", "SQLite", "WebSocket"],
+    github: "https://github.com/Naman-1508/XTI-SOC",
+    live: null,
+  },
   {
     title: "RoadIntel",
-    subtitle: "Smart Traffic & Accident Platform",
-    description:
-      "A full-stack traffic intelligence system allowing users to register, report accidents with live details, and track real-time incidents. Built with a secure JWT-authenticated backend and responsive React frontend — ensuring safety awareness at scale.",
-    tags: ["React", "TypeScript", "TailwindCSS", "Node.js", "Express.js", "MongoDB", "JWT"],
+    subtitle: "AI Traffic Intelligence Platform",
+    year: "2025",
+    description: "Geolocated traffic incident reporting platform with real-time geospatial heatmap dashboards using Leaflet. Integrated YOLO-based computer vision for vehicle detection from video streams and Google Gemini API for AI-powered incident severity classification.",
+    tags: ["React (TS)", "Node.js", "Express", "MongoDB", "YOLO", "Gemini API", "Leaflet"],
     github: "https://github.com/Naman-1508/RoadIntel",
-    status: "active",
-    accent: "hsl(180,100%,50%)",
-    number: "01",
+    live: null,
   },
   {
-    title: "GuardianQuest",
-    subtitle: "AI-Powered Platform for Children",
-    description:
-      "An emotionally intelligent platform using Generative AI to help children in hospitals and orphanages create personalized stories and games — delivering joy, creative expression, and emotional support during challenging times.",
-    tags: ["React", "TypeScript", "TailwindCSS", "Node.js", "Express.js", "MongoDB", "JWT", "Gen AI"],
-    github: "https://github.com/Naman-1508/GuardianQuest",
-    status: "active",
-    accent: "hsl(270,100%,65%)",
-    number: "02",
-  },
-  {
-    title: "Jarvis",
-    subtitle: "AI Virtual Assistant",
-    description:
-      "A fully customizable AI virtual assistant built in Python, automating everyday tasks through speech recognition and text-to-speech synthesis — your personal Tony Stark experience, fully open-source.",
-    tags: ["Python", "Speech Recognition", "TTS", "APIs", "Automation"],
-    github: "https://github.com/Naman-1508/Jarvis",
-    status: "active",
-    accent: "hsl(320,100%,60%)",
-    number: "03",
+    title: "HealTrip",
+    subtitle: "AI Medical Tourism Platform",
+    year: "2025",
+    description: "Medical tourism platform connecting international patients with verified hospitals. Built an ML microservice using Scikit-learn and FastAPI for hospital ranking and personalized recommendations; integrated Razorpay and Stripe for secure global payments.",
+    tags: ["React", "Node.js", "MongoDB", "FastAPI", "Scikit-learn", "Razorpay", "Stripe"],
+    github: "https://github.com/Naman-1508/HealTrip",
+    live: "#", // Assuming there is a live demo as per resume, keeping placeholder
   },
 ];
-
-const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
-  const [hovered, setHovered] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -10;
-    cardRef.current.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${y}deg) translateY(-6px)`;
-  };
-
-  const handleMouseLeave = () => {
-    setHovered(false);
-    if (cardRef.current) {
-      cardRef.current.style.transform = "";
-    }
-  };
-
-  return (
-    <div
-      ref={cardRef}
-      className={`reveal delay-${index * 150}`}
-      style={{
-        transition: "transform 0.15s ease, box-shadow 0.3s ease",
-        transformStyle: "preserve-3d",
-      }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div
-        className="h-full rounded-2xl overflow-hidden relative"
-        style={{
-          background: "rgba(255,255,255,0.02)",
-          border: `1px solid ${hovered ? project.accent + "44" : "rgba(255,255,255,0.06)"}`,
-          transition: "border-color 0.3s ease",
-          boxShadow: hovered ? `0 0 30px ${project.accent}12, 0 20px 60px rgba(0,0,0,0.4)` : "0 4px 20px rgba(0,0,0,0.2)",
-        }}
-      >
-        {/* Top accent bar */}
-        <div
-          className="h-px w-full"
-          style={{
-            background: `linear-gradient(90deg, transparent, ${project.accent}, transparent)`,
-            opacity: hovered ? 1 : 0.4,
-            transition: "opacity 0.3s ease",
-          }}
-        />
-
-        {/* Glow overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: `radial-gradient(ellipse 60% 40% at 50% 0%, ${project.accent}08 0%, transparent 70%)`,
-            opacity: hovered ? 1 : 0,
-            transition: "opacity 0.3s ease",
-          }}
-        />
-
-        <div className="p-7 flex flex-col h-full relative">
-          {/* Header */}
-          <div className="flex items-start justify-between mb-4">
-            <div>
-              <div
-                className="font-mono text-xs mb-1"
-                style={{ color: `${project.accent}99`, letterSpacing: "0.15em" }}
-              >
-                PROJECT_{project.number}
-              </div>
-              <h3
-                className="font-display font-black text-xl mb-0.5"
-                style={{
-                  color: hovered ? project.accent : "rgba(255,255,255,0.9)",
-                  transition: "color 0.3s ease",
-                }}
-              >
-                {project.title}
-              </h3>
-              <p className="text-white/40 text-xs font-mono">{project.subtitle}</p>
-            </div>
-            <div
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono"
-              style={{
-                background: project.status === "active" ? "rgba(0,255,100,0.08)" : "rgba(0,255,255,0.08)",
-                border: `1px solid ${project.status === "active" ? "rgba(0,255,100,0.2)" : "rgba(0,255,255,0.2)"}`,
-                color: project.status === "active" ? "hsl(150,100%,60%)" : "hsl(180,100%,65%)",
-              }}
-            >
-              <span
-                className="w-1.5 h-1.5 rounded-full"
-                style={{
-                  background: project.status === "active" ? "hsl(150,100%,60%)" : "hsl(180,100%,65%)",
-                  boxShadow: `0 0 4px ${project.status === "active" ? "hsl(150,100%,60%)" : "hsl(180,100%,65%)"}`,
-                  animation: "pulse-glow 2s ease infinite",
-                }}
-              />
-              {project.status === "active" ? "In Dev" : "Live"}
-            </div>
-          </div>
-
-          {/* Description */}
-          <p className="text-white/50 text-sm leading-relaxed mb-6 flex-1">
-            {project.description}
-          </p>
-
-          {/* Tags */}
-          <div className="flex flex-wrap gap-1.5 mb-6">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-2.5 py-1 rounded text-xs font-mono"
-                style={{
-                  background: `${project.accent}09`,
-                  border: `1px solid ${project.accent}22`,
-                  color: `${project.accent}cc`,
-                }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          {/* Actions */}
-          <div className="flex gap-3">
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-mono tracking-wider uppercase transition-all duration-200"
-              style={{
-                border: `1px solid ${project.accent}30`,
-                color: project.accent,
-                background: `${project.accent}07`,
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.background = `${project.accent}15`;
-                (e.currentTarget as HTMLElement).style.boxShadow = `0 0 12px ${project.accent}20`;
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.background = `${project.accent}07`;
-                (e.currentTarget as HTMLElement).style.boxShadow = "none";
-              }}
-            >
-              <Github className="w-3.5 h-3.5" />
-              Source Code
-            </a>
-            {project.live ? (
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200"
-                style={{
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  color: "rgba(255,255,255,0.4)",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.8)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.4)";
-                }}
-              >
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-            ) : null}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const Projects = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -231,8 +39,8 @@ const Projects = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".reveal, .reveal-left, .reveal-right").forEach((el, i) => {
-              setTimeout(() => el.classList.add("visible"), i * 120);
+            entry.target.querySelectorAll(".reveal").forEach((el, i) => {
+              setTimeout(() => el.classList.add("visible"), i * 150);
             });
           }
         });
@@ -244,95 +52,71 @@ const Projects = () => {
   }, []);
 
   return (
-    <section id="projects" ref={sectionRef} className="py-28 px-6 relative overflow-hidden">
-      {/* BG decoration */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, rgba(128,0,255,0.03) 0%, transparent 70%)",
-          filter: "blur(60px)",
-        }}
-      />
-
-      <div className="max-w-7xl mx-auto relative">
-        {/* Header */}
-        <div className="mb-4 reveal">
-          <div
-            className="inline-flex items-center gap-2 mb-4 px-3 py-1"
-            style={{
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: "0.7rem",
-              letterSpacing: "0.2em",
-              color: "rgba(128,0,255,0.8)",
-              border: "1px solid rgba(128,0,255,0.15)",
-              borderRadius: "3px",
-              background: "rgba(128,0,255,0.04)",
-            }}
-          >
-            03 / PROJECTS
+    <section id="projects" ref={sectionRef} className="py-24 px-6 relative border-t border-white/[0.05]">
+      <div className="max-w-6xl mx-auto">
+        <div className="reveal mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight mb-4">Featured Work</h2>
+            <p className="text-white/50 text-lg max-w-2xl">
+              Systems, platforms, and intelligent frameworks I've built.
+            </p>
           </div>
-          <div className="flex items-end justify-between gap-4 flex-wrap">
-            <div>
-              <h2
-                className="font-display font-black"
-                style={{
-                  fontSize: "clamp(2rem, 5vw, 4rem)",
-                  background: "linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.4))",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Featured Work
-              </h2>
-              <div
-                className="mt-3 h-px w-24"
-                style={{ background: "linear-gradient(90deg, hsl(270,100%,65%), transparent)" }}
-              />
-            </div>
-            <a
-              href="https://github.com/Naman-1508"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-xs font-mono text-white/30 hover:text-white/60 transition-colors pb-1"
-            >
-              <Github className="w-3.5 h-3.5" />
-              github.com/Naman-1508
-              <ExternalLink className="w-3 h-3" />
-            </a>
-          </div>
-        </div>
-
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6 mt-12">
-          {projects.map((project, i) => (
-            <ProjectCard key={project.title} project={project} index={i} />
-          ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="mt-12 text-center reveal">
           <a
             href="https://github.com/Naman-1508"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-6 py-3 rounded-xl text-sm font-mono text-white/50 hover:text-white/80 transition-all duration-300"
-            style={{
-              border: "1px solid rgba(255,255,255,0.06)",
-              background: "rgba(255,255,255,0.02)",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.12)";
-              (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.04)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.06)";
-              (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.02)";
-            }}
+            className="group flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
           >
-            <Github className="w-4 h-4" />
-            View all repositories on GitHub
-            <ExternalLink className="w-3.5 h-3.5" />
+            View all on GitHub
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-6">
+          {projects.map((project, i) => (
+            <div key={i} className="premium-card p-6 reveal flex flex-col h-full group">
+              <div className="flex justify-between items-start mb-4">
+                <span className="font-mono text-xs text-white/30">{project.year}</span>
+                <div className="flex gap-3">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/40 hover:text-white transition-colors"
+                    aria-label="GitHub Repository"
+                  >
+                    <Github className="w-5 h-5" />
+                  </a>
+                  {project.live && project.live !== "#" && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white/40 hover:text-white transition-colors"
+                      aria-label="Live Demo"
+                    >
+                      <ExternalLink className="w-5 h-5" />
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <h3 className="text-xl font-semibold text-white/90 mb-1">{project.title}</h3>
+              <p className="text-sm font-medium text-white/50 mb-4">{project.subtitle}</p>
+              
+              <p className="text-sm text-white/60 leading-relaxed mb-6 flex-1">
+                {project.description}
+              </p>
+
+              <div className="flex flex-wrap gap-2 mt-auto">
+                {project.tags.map((tag) => (
+                  <span key={tag} className="premium-tag text-[11px] px-2 py-1 bg-white/[0.02]">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
