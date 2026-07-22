@@ -170,7 +170,7 @@ const BentoGrid = () => {
               <p className="text-xs lg:text-sm text-white/50 max-w-md leading-relaxed">Explore recent projects spanning Explainable AI, Medical Tourism, and Traffic Intelligence.</p>
             </div>
             <div className="flex flex-wrap gap-2 mt-auto">
-              {['XTI-SOC', 'RoadIntel', 'HealTrip'].map((tag, i) => (
+              {['SIGNAL', 'RoadIntel', 'CricNation', 'HealTrip', 'VulnFusion'].map((tag, i) => (
                 <div key={tag} className="px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.08] text-[10px] lg:text-xs font-mono text-white/70 group-hover:bg-cyan-500/10 group-hover:border-cyan-500/20 group-hover:text-cyan-300 transition-colors" style={{ transitionDelay: `${i * 60}ms` }}>{tag}</div>
               ))}
             </div>

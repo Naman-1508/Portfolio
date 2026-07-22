@@ -7,7 +7,7 @@ const education = [
     major: "Cyber Security",
     institution: "MS Ramaiah Institute of Technology",
     location: "Bangalore, India",
-    score: "9.07 / 10.0",
+    score: "9.19 / 10.0",
     scoreLabel: "CGPA",
     status: "Current",
     year: "2023 – 2027",

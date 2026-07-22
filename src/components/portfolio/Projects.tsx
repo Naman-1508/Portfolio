@@ -3,6 +3,15 @@ import { Github, ExternalLink, ArrowRight } from "lucide-react";
 
 const projects = [
   {
+    title: "SIGNAL",
+    subtitle: "AI-Powered Notification Intelligence & Decision Enforcement",
+    year: "2026",
+    description: "Android Kotlin Compose app built with Groq AI that intercepts notifications, extracts tasks/deadlines, and enforces decisions using a mandatory full-screen overlay to prevent notification fatigue and task avoidance.",
+    tags: ["Kotlin", "Jetpack Compose", "Groq AI", "Room DB", "WorkManager"],
+    github: "https://github.com/Naman-1508/SamsungClaw",
+    live: null,
+  },
+  {
     title: "XTI-SOC",
     subtitle: "Explainable AI Security Operations Framework",
     year: "2026",
@@ -10,6 +19,15 @@ const projects = [
     tags: ["Python", "FastAPI", "React (TS)", "XGBoost", "SHAP", "WebSocket"],
     github: "https://github.com/Naman-1508/XTI-SOC",
     live: null,
+  },
+  {
+    title: "CricNation",
+    subtitle: "Full-stack Digital Scoring Platform",
+    year: "2026",
+    description: "A professional broadcasting experience for local cricket matches featuring a real-time live scoring engine, deep player analytics with interactive charts, a social feed, and tournament management in a premium glassmorphic UI.",
+    tags: ["Next.js 14", "tRPC", "React", "Live Scoring"],
+    github: "https://github.com/Naman-1508/CricNation",
+    live: "https://cricnation.vercel.app",
   },
   {
     title: "RoadIntel",
@@ -27,7 +45,61 @@ const projects = [
     description: "Medical tourism platform connecting international patients with verified hospitals. Built an ML microservice using Scikit-learn and FastAPI for hospital ranking and personalized recommendations; integrated Razorpay and Stripe for secure global payments.",
     tags: ["React", "Node.js", "MongoDB", "FastAPI", "Scikit-learn", "Stripe"],
     github: "https://github.com/Naman-1508/HealTrip",
-    live: "#",
+    live: "https://heal-trip.vercel.app",
+  },
+  {
+    title: "VulnFusion",
+    subtitle: "Automated Web Security Scanner",
+    year: "2026",
+    description: "Automated web security scanner that assesses web applications for vulnerabilities. Integrates Subfinder, Nikto, Nuclei, XSStrike, and sqlmap to detect XSS, SQL injection, and misconfigurations via a centralized dashboard.",
+    tags: ["Security", "Nuclei", "sqlmap", "XSStrike", "Scanner"],
+    github: "https://github.com/Naman-1508/VulnFusion",
+    live: "https://vuln-fusion.vercel.app",
+  },
+  {
+    title: "CodeArena",
+    subtitle: "Real-time Coding & Interview Platform",
+    year: "2026",
+    description: "A production-grade, real-time coding platform that combines gamified algorithmic challenges with live, collaborative technical interview environments and Docker-isolated code execution.",
+    tags: ["Docker", "WebSockets", "Collaboration", "Code Execution"],
+    github: "https://github.com/Naman-1508/CodeArena",
+    live: "https://code-arena-lemon.vercel.app",
+  },
+  {
+    title: "Flowdesk",
+    subtitle: "Terminal-inspired Developer Focus App",
+    year: "2026",
+    description: "A developer focus application built for engineers to maximize deep-work time on GitHub issues. Combines a structured Pomodoro-style session engine with AI-generated context bundling via Groq in a dark-mode UI.",
+    tags: ["Groq AI", "Productivity", "GitHub API", "Pomodoro"],
+    github: "https://github.com/Naman-1508/Flowdesk",
+    live: "https://flowdesk-six-lac.vercel.app",
+  },
+  {
+    title: "NetSentinel",
+    subtitle: "Real-time Network Packet Analyzer",
+    year: "2026",
+    description: "A real-time network packet analyzer with an embedded XGBoost ML engine. Captures live traffic using a high-performance hybrid backend and instantly scores flows to detect malicious activity through a sleek Next.js UI.",
+    tags: ["XGBoost", "Machine Learning", "Next.js", "Packet Analysis"],
+    github: "https://github.com/Naman-1508/NetSentinel",
+    live: null,
+  },
+  {
+    title: "CodeChrono",
+    subtitle: "Interactive Codebase Visual Timeline",
+    year: "2026",
+    description: "Transforms any GitHub repository into an interactive visual timeline. Scrub through time, see the file tree evolve, watch features appear and disappear, and understand which parts of the codebase changed frequently using pure Git data.",
+    tags: ["Git", "Visualization", "Interactive", "Codebase Analytics"],
+    github: "https://github.com/Naman-1508/CodeChrono",
+    live: "https://code-chrono-lake.vercel.app",
+  },
+  {
+    title: "Fraud-Detection",
+    subtitle: "ML-based FinTech Fraud Detection",
+    year: "2025",
+    description: "ML-based FinTech Fraud Detection System deployed using Jenkins, Docker, Kubernetes, and Ansible. Features a complete DevSecOps integration with Trivy and SonarQube for automated security and code quality checks.",
+    tags: ["Machine Learning", "Kubernetes", "Docker", "DevSecOps", "Jenkins", "Ansible"],
+    github: "https://github.com/Naman-1508/Fraud-Detection",
+    live: null,
   },
 ];
 
@@ -156,7 +228,7 @@ const Projects = () => {
           </a>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-6 perspective-1000">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 perspective-1000">
           {projects.map((project, i) => (
             <ProjectCard key={i} project={project} index={i} />
           ))}

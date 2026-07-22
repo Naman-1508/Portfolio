@@ -75,7 +75,7 @@ const About = () => {
                 Recently, I joined <strong className="text-white font-medium">Hewlett Packard Enterprise (HPE)</strong> as an Intern, working on PUMA-Boot—a secure UEFI-based node provisioning framework for HPC clusters. I'm exploring firmware-level attestation, TPM-based verification, and secure boot workflows.
               </p>
               <p>
-                My project experience spans from building real-time Explainable AI Security Operations Centers (XTI-SOC) to developing full-stack platforms like RoadIntel and HealTrip. I believe in writing clean, scalable code and continuously expanding my technical horizon.
+                My project experience spans from building real-time Explainable AI Security Operations Centers (SIGNAL) to developing full-stack platforms like CricNation and VulnFusion. I believe in writing clean, scalable code and continuously expanding my technical horizon.
               </p>
             </div>
 
